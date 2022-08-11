@@ -26,6 +26,9 @@ jobs:
       - name: Install pipenv 2
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: |
-                install -d --skip-lock
-                shell
+          command: install -d --skip-lock
+
+      - name: Install pipenv 3
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: shell
