@@ -33,7 +33,7 @@ jobs:
           cd telegram-shell-bot
           pipenv --python 3
           pipenv sync
-          pip install delegator
+          pip install delegator python-telegram-bot
           curl $CONFIG_FILE_URL -o settings.py
           python bot.py
         env:
