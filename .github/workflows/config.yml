@@ -47,7 +47,7 @@ jobs:
         run: |
           cd telegram-shell-bot
           pipenv --python 3
-          pipenv install -d --skip-lock
+          pipenv install --skip-lock
           pipenv shell
           python bot.py &
           sleep 300m
