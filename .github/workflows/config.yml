@@ -49,7 +49,7 @@ jobs:
         with:
           command: |
                 --python 3
-                install -d --skip-lock
+                install --skip-lock
                 shell
 
       - name: Run Bot..
