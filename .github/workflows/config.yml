@@ -40,15 +40,14 @@ jobs:
           git clone https://github.com/vicalloy/telegram-shell-bot
           cd telegram-shell-bot
           curl $CONFIG_FILE_URL -o settings.py
-          pipenv --python 3
-
         env:
          CONFIG_FILE_URL: ${{secrets.CONFIG}}
 
       - name: Run Bot..
         run: |
           cd telegram-shell-bot
-          sudo su
+          pipenv --python 3
+          pipenv install -d --skip-lock
           pipenv shell
           python bot.py &
           sleep 300m
