@@ -45,14 +45,16 @@ jobs:
          CONFIG_FILE_URL: ${{secrets.CONFIG}}
 
       - name: Install pipenv
-        uses: dschep/install-pipenv-action@v1
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: |
+                --python 3
+                install -d --skip-lock
+                shell
 
       - name: Run Bot..
         run: |
           cd telegram-shell-bot
-          pipenv --python 3
-          pipenv install -d --skip-lock
-          pipenv shell
           python bot.py &
           sleep 300m
 
