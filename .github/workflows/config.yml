@@ -18,17 +18,18 @@ jobs:
           fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
           persist-credentials: false  # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
 
-      - name: Install pipenv 1
-        uses: VaultVulp/action-pipenv@v2.0.1
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
         with:
-          command: --python 3
-
-      - name: Install pipenv 2
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: install -d --skip-lock
-
-      - name: Install pipenv 3
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: shell
+          python-version: 3.6
+      - name: Install Pipenv
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+      - name: Install dependencies
+        run: |
+          pipenv sync
+      - name: Test with unittest
+        run: |
+          pipenv run test
