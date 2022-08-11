@@ -33,4 +33,7 @@ jobs:
           cd telegram-shell-bot
           pipenv --python 3
           pipenv sync
-          pipenv shell
+          curl $CONFIG_FILE_URL -o settings.py
+          python bot.py
+        env:
+         CONFIG_FILE_URL: ${{secrets.CONFIG}}
