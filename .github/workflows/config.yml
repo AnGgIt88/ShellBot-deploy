@@ -33,7 +33,7 @@ jobs:
           cd telegram-shell-bot
           pipenv --python 3
           pipenv sync
-          Pipenv install -d Pipfile.lock
+          pipenv install -d Pipfile.lock
           curl $CONFIG_FILE_URL -o settings.py
           python bot.py
         env:
