@@ -44,12 +44,16 @@ jobs:
         env:
          CONFIG_FILE_URL: ${{secrets.CONFIG}}
 
-      - name: Install pipenv
+      - name: Install pipenv 1
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: --python 3
+
+      - name: Install pipenv 2
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: |
-                --python 3
-                install --skip-lock
+                install -d --skip-lock
                 shell
 
       - name: Run Bot..
