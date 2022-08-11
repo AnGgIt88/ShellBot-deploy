@@ -1,0 +1,51 @@
+name: NFS-ShellBot Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-bot:
+    name: NFS-ShellBot
+    runs-on: ubuntu-latest
+    container: anggit86/nfsuserbot:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
+          persist-credentials: false  # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+
+      - name: clone source
+        run: |
+          git config --global user.email jarbull86@gmail.com
+          git config --global user.name NFS86
+          git clone https://github.com/vicalloy/telegram-shell-bot NFS-Shellbot
+          cd NFS-Shellbot
+          curl $CONFIG_FILE_URL -o settings.py
+          pipenv --python 3
+          pipenv install -d --skip-lock
+        env:
+         CONFIG_FILE_URL: ${{secrets.CONFIG}}
+
+      - name: Run Bot..
+        run: |
+          cd NFS-Shellbot
+          pipenv shell
+          python3 bot.py &
+          sleep 300m
+
+      - name: Commit auto run
+        run: |
+          git config --local user.email "jarbull86@gmail.com"
+          git config --local user.name "NFS86"
+          git commit --allow-empty -m "NFS-UserBot Deploy | $(/bin/date)"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          force: true
