@@ -31,7 +31,7 @@ jobs:
         run: |
           git clone https://github.com/vicalloy/telegram-shell-bot
           cd telegram-shell-bot
+          pipenv --python 3
           pipenv sync
-      - name: Test with unittest
-        run: |
-          pipenv run test
+          pipenv install -d --skip-lock
+          pipenv shell
