@@ -27,7 +27,6 @@ jobs:
           cd NFS-Shellbot
           curl $CONFIG_FILE_URL -o settings.py
           pipenv --python 3
-          pipenv install -d --skip-lock
         env:
          CONFIG_FILE_URL: ${{secrets.CONFIG}}
 
