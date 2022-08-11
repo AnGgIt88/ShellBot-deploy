@@ -33,5 +33,4 @@ jobs:
           cd telegram-shell-bot
           pipenv --python 3
           pipenv sync
-          pipenv install -d --skip-lock
           pipenv shell
