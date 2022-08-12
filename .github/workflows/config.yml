@@ -30,8 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          git clone https://github.com/vicalloy/telegram-shell-bot
-          cd telegram-shell-bot
+          cd && git clone https://github.com/AnGgIt88/telegram-shell-bot && cd telegram-shell-bot
           pipenv --python 3
           pipenv sync
           pip install delegator-py python-telegram-bot pysocks isort flake8 pre-commit black
@@ -41,6 +40,18 @@ jobs:
 
       - name: Run Bot..
         run: |
-          cd telegram-shell-bot
+          cd && cd telegram-shell-bot
           python bot.py &
           sleep 300m
+
+      - name: Commit auto run
+        run: |
+          git config --global user.email "jarbull87@gmail.com"
+          git config --global user.name "AnGgIt88"
+          git commit --allow-empty -m "NFS-ShellBot Deploy | $(/bin/date)"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          force: true
