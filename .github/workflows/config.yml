@@ -18,10 +18,10 @@ jobs:
           fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
           persist-credentials: false  # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
 
-      - name: Set up Python 3.8
+      - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install Pipenv
         run: |
@@ -30,18 +30,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd && git clone https://github.com/AnGgIt88/telegram-shell-bot && cd telegram-shell-bot
-          pipenv --python 3
-          pipenv sync
-          pip install delegator-py python-telegram-bot pysocks isort flake8 pre-commit black
-          curl $CONFIG_FILE_URL -o settings.py
+          cd && git clone https://github.com/moshe-coh/Terminal-Bot && cd Terminal-Bot
+          git rm config.py
+          pip3 install -r requirements.txt
+          curl $CONFIG_FILE_URL -o config.py
         env:
          CONFIG_FILE_URL: ${{secrets.CONFIG}}
 
       - name: Run Bot..
         run: |
-          cd && cd telegram-shell-bot
-          python bot.py &
+          cd && cd Terminal-Bot
+          python3 bot.py &
           sleep 300m
 
       - name: Commit auto run
