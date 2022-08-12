@@ -30,8 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd && git clone https://github.com/moshe-coh/Terminal-Bot && cd Terminal-Bot
-          git rm config.py
+          cd && git clone https://github.com/AnGgIt88/Terminal-Bot && cd Terminal-Bot
           pip3 install -r requirements.txt
           curl $CONFIG_FILE_URL -o config.py
         env:
