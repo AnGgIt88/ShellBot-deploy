@@ -28,11 +28,6 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install pipenv wheel
 
-      - uses: fastai/workflows/ssh@master
-        with:
-          ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          key_file: github.action
-
       - name: Install dependencies
         run: |
           cd && git clone https://github.com/AnGgIt88/Terminal-Bot && cd Terminal-Bot
